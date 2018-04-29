@@ -1,4 +1,4 @@
-const address = '0x0aecc6de1d6344cf435300de8c1d2ae4d356a883';
+const address = '0xb100ef781f0f84bc9835835735a297e878d81294';
 
 let contract = null;
 
