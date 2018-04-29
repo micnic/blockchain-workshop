@@ -67,8 +67,11 @@ export default class App extends React.Component {
 					vote: this.vote.bind(this)
 				});
 			});
+			
+			let proposalsGrid =  React.createElement('div', {"className": "grid"}, proposals);
 
-			return React.createElement(React.Fragment, null, title, proposals);
+			return React.createElement(React.Fragment, null, title, proposalsGrid);
+
 		} else {
 
 			return React.createElement(React.Fragment, null, 'Loading...');

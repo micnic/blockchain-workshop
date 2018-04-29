@@ -2,7 +2,25 @@ const address = '0xb100ef781f0f84bc9835835735a297e878d81294';
 
 let contract = null;
 
+const fruitImages = {
+	"Peach": "https://images.pexels.com/photos/42218/food-fresh-fruit-isolated-42218.jpeg?auto=compress&cs=tinysrgb&h=256&w=256",
+	"Ananas": "https://images.pexels.com/photos/27269/pexels-photo-27269.jpg?auto=compress&cs=tinysrgb&h=256&w=256",
+	"Grape": "https://images.pexels.com/photos/357742/pexels-photo-357742.jpeg?auto=compress&cs=tinysrgb&h=256&w=256",
+	"Strawberry": "https://images.pexels.com/photos/70746/strawberries-red-fruit-royalty-free-70746.jpeg?auto=compress&cs=tinysrgb&h=256&w=256",
+	"Lemon": "https://images.pexels.com/photos/266346/pexels-photo-266346.jpeg?auto=compress&cs=tinysrgb&h=256&w=256",
+	"Kiwi": "https://images.pexels.com/photos/953215/pexels-photo-953215.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=256&w=256",
+	"Apple": "https://images.pexels.com/photos/162806/apple-fruit-fruits-delicious-162806.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=256&w=256",
+	"Watermelon": "https://images.pexels.com/photos/880447/pexels-photo-880447.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=256&w=256",
+	"Raspberry": "https://images.pexels.com/photos/59999/raspberries-fruits-fruit-berries-59999.jpeg?auto=compress&cs=tinysrgb&h=256&w=256",
+	"Banana": "https://images.pexels.com/photos/41957/banana-fruit-healthy-yellow-41957.jpeg?auto=compress&cs=tinysrgb&h=256&w=256",
+	"Cherry": "https://images.pexels.com/photos/768009/pexels-photo-768009.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=256&w=256"
+}
+
 export default class Api {
+
+	static imgURL(proposalName) {
+		return fruitImages[proposalName];
+	}
 
 	static getProposals() {
 
