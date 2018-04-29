@@ -102,6 +102,24 @@ export default class Api {
 		});
 	}
 
+	static getLeader() {
+		
+		return new Promise((resolve, reject) => {
+
+			if (contract) {
+				contract.getLeader((error, leader) => {
+					if (error) {
+						reject(error);
+					} else {
+						resolve(web3.toUtf8(leader))
+					}
+				});
+			} else {
+				reject(Error('No contract'));
+			}
+		});
+	}
+
 	static getContract() {
 
 		return fetch('/abi.json').then((response) => {
