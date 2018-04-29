@@ -25,19 +25,19 @@ export default class Api {
 		});
 	}
 
-	static vote( proposalName ) {
+	static vote(proposal) {
 
 		return new Promise((resolve, reject) =>  {
 
 			if (contract) {
-
-				contract.vote((error) => {
+				resolve();
+				/*contract.vote(proposal, (error) => {
 					if (error) {
 						reject(error);
 					} else {
 						resolve();
 					}
-				})
+				});*/
 			} else {
 				reject(Error('No contract'));
 			}
@@ -55,7 +55,7 @@ export default class Api {
 						reject(error);
 					} else {
 						resolve(result);
-					}					
+					}
 				});
 			} else {
 				reject(Error('No contract'));
@@ -128,6 +128,8 @@ export default class Api {
 		}).then((result) => {
 
 			contract = web3.eth.contract(result).at(address);
+
+			window.contract = contract;
 
 			return contract;
 		});
