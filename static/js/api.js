@@ -25,6 +25,25 @@ export default class Api {
 		});
 	}
 
+	static vote( proposalName ) {
+
+		return new Promise((resolve, reject) =>  {
+
+			if (contract) {
+				
+				contract.vote((error) => {
+					if (error) {
+						reject(error);
+					} else {
+						resolve();
+					}
+				})
+			} else {
+				reject(Error('No contract'));
+			}
+		});
+	}
+
 	static getContract() {
 
 		return fetch('/abi.json').then((response) => {
