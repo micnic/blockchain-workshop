@@ -63,6 +63,25 @@ export default class Api {
 		});
 	}
 
+	static getProposalVoteCount( proposalName ) {
+
+		return new Promise((resolve, reject) =>  {
+
+			if (contract) {
+
+				contract.getProposalVoteCount(proposalName, (error, result) => {
+					if (error) {
+						reject(error);
+					} else {
+						resolve(web3.toDecimal(result));
+					}
+				});
+			} else {
+				reject(Error('No contract'));
+			}
+		});
+	}
+
 	static getContract() {
 
 		return fetch('/abi.json').then((response) => {
