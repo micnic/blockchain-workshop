@@ -30,7 +30,7 @@ export default class Api {
 		return new Promise((resolve, reject) =>  {
 
 			if (contract) {
-				
+
 				contract.vote((error) => {
 					if (error) {
 						reject(error);
@@ -38,6 +38,25 @@ export default class Api {
 						resolve();
 					}
 				})
+			} else {
+				reject(Error('No contract'));
+			}
+		});
+	}
+
+	static hasVoted() {
+		return new Promise((resolve, reject) => {
+
+			if (contract) {
+				const userID = web3.eth.accounts[0];
+
+				contract.hasVoted(userID, (error, result) => {
+					if (error) {
+						reject(error);
+					} else {
+						resolve(result);
+					}					
+				});
 			} else {
 				reject(Error('No contract'));
 			}
