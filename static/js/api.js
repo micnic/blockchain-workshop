@@ -30,14 +30,13 @@ export default class Api {
 		return new Promise((resolve, reject) =>  {
 
 			if (contract) {
-				resolve();
-				/*contract.vote(proposal, (error) => {
+				contract.vote(proposal, (error) => {
 					if (error) {
 						reject(error);
 					} else {
 						resolve();
 					}
-				});*/
+				});
 			} else {
 				reject(Error('No contract'));
 			}
@@ -83,7 +82,7 @@ export default class Api {
 	}
 
 	static getVote() {
-		
+
 		return new Promise((resolve, reject) => {
 
 			if (contract) {
@@ -94,7 +93,7 @@ export default class Api {
 						reject(error);
 					} else {
 						resolve(web3.toUtf8(result));
-					}					
+					}
 				});
 			} else {
 				reject(Error('No contract'));
@@ -103,7 +102,7 @@ export default class Api {
 	}
 
 	static getLeader() {
-		
+
 		return new Promise((resolve, reject) => {
 
 			if (contract) {

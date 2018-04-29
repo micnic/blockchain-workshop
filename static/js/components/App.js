@@ -12,6 +12,8 @@ export default class App extends React.Component {
 		this.state = {
 			loaded: false,
 			voted: false,
+			totalVoteCount: 0,
+			leader: null,
 			proposals: null
 		};
 	}
@@ -23,9 +25,11 @@ export default class App extends React.Component {
 			return Promise.all([
 				Promise.resolve(contract),
 				Api.hasVoted(),
+				Api.getLeader(),
+				Api.getTotalVoteCount(),
 				Api.getProposals()
 			]);
-		}).then(([contract, voted, proposals]) => {
+		}).then(([contract, voted, leader, totalVoteCount, proposals]) => {
 
 			if (!voted) {
 				contract.Voted().watch((error, response) => {
@@ -37,7 +41,9 @@ export default class App extends React.Component {
 
 			this.setState({
 				loaded: true,
+				leader,
 				proposals,
+				totalVoteCount,
 				voted
 			});
 		}).catch((error) => {
@@ -49,13 +55,14 @@ export default class App extends React.Component {
 
 		if (this.state.loaded) {
 
-			const title = React.createElement('div', {}, 'Here are our proposals:');
+			const title = React.createElement('div', {}, `Here are our fruits, choose one: (Voters: ${this.state.totalVoteCount})`);
 
 			const proposals = this.state.proposals.map((proposal) => {
 
 				return React.createElement(Proposal, {
 					proposal,
-					voted: this.state.voted,
+					disabled: this.state.voted,
+					leader: (this.state.leader === proposal),
 					key: proposal,
 					vote: this.vote.bind(this)
 				});

@@ -4,14 +4,40 @@ import Api from '../api';
 
 export default class Proposal extends React.Component {
 
+	constructor() {
+
+		super();
+
+		this.state = {
+			voteCount: 0
+		};
+	}
+
+	componentDidMount() {
+
+		Api.getProposalVoteCount(this.props.proposal).then((voteCount) => {
+
+			this.setState({
+				voteCount
+			});
+		});
+	}
+
 	render() {
 
 		const voteButton = React.createElement('button', {
-			disabled: this.props.voted,
+			disabled: this.props.disabled,
 			onClick: this.vote.bind(this)
 		}, 'vote');
 
-		return React.createElement('div', null, this.props.proposal, voteButton);
+		const voteCount = React.createElement('span', {}, `Votes: ${this.state.voteCount}`);
+
+		return React.createElement('div', {
+			className: 'proposal',
+			style: {
+				background: this.props.leader ? '#F0FFF0' : 'transparent'
+			}
+		}, this.props.proposal, voteCount, voteButton);
 	}
 
 	vote() {
