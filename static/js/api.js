@@ -82,6 +82,26 @@ export default class Api {
 		});
 	}
 
+	static getVote() {
+		
+		return new Promise((resolve, reject) => {
+
+			if (contract) {
+				const userID = web3.eth.accounts[0];
+
+				contract.getVote(userID, (error, result) => {
+					if (error) {
+						reject(error);
+					} else {
+						resolve(web3.toUtf8(result));
+					}					
+				});
+			} else {
+				reject(Error('No contract'));
+			}
+		});
+	}
+
 	static getContract() {
 
 		return fetch('/abi.json').then((response) => {
