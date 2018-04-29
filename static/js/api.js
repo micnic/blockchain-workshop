@@ -120,6 +120,24 @@ export default class Api {
 		});
 	}
 
+	static getTotalVoteCount() {
+
+		return new Promise((resolve, reject) => {
+
+			if (contract) {
+				contract.totalVoteCount.call((error, count) => {
+					if (error) {
+						reject(error);
+					} else {
+						resolve(web3.toDecimal(count))
+					}
+				});
+			} else {
+				reject(Error('No contract'));
+			}
+		});
+	}
+
 	static getContract() {
 
 		return fetch('/abi.json').then((response) => {
